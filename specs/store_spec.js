@@ -7,6 +7,7 @@ var store1 = new Store("Recordz", "London");
 var collector1 = new Collector("James");
 var record1 = new Record("Queen", "Greatest Hits", 3.00);
 var record2 = new Record("Abba", "Greatest Hits", 2.00);
+var record3 = new Record("Five", "Greatest Hits", 1.00);
 
 describe ( 'Store', function() {
 
@@ -52,6 +53,21 @@ describe ( 'Store', function() {
     assert.strictEqual(47.00, store1.balance);
     assert.strictEqual(23.00, collector1.balance);
     assert.strictEqual(1, collector1.records.length);
+  })
+  it('can sort array by artist', function() {
+      store1.add(record1);
+      store1.add(record2);
+      store1.add(record3);
+      var sorted = store1.sortByArtist()
+      assert.strictEqual("Abba", sorted[0].artist );
+    
+  })
+
+  it( 'can create inventory of stock', function( ){
+    store1.add(record1);
+    store1.add(record2);
+    store1.add(record3);
+    console.log(store1.inventory());
   })
 
 

@@ -35,6 +35,15 @@ Store.prototype = {
       this.records.push(record);
       collector.remove(record);
     } 
+  },
+  sortByArtist: function() {
+    return _.sortBy(this.records, ['artist', 'title']);
+  },
+  inventory: function(){
+    var sorted = this.sortByArtist();
+    return sorted.map(function(record){
+      return record.artist.toString() + " - " + record.title.toString() + " - " + record.price.toString();
+    });
   }
 }
 

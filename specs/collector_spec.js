@@ -11,7 +11,10 @@ var record2 = new Record("Abba", "Greatest Hits", 2.00);
 describe ( 'Collector', function() {
 
   beforeEach( function() {
-    collector1.records = []
+    collector1.records = [];
+    collector1.balance = 20;
+    store1.records = [];
+    store1.balance = 50;
   })
 
   it ('has records', function() {
@@ -35,6 +38,20 @@ describe ( 'Collector', function() {
     collector1.add(record2);
     collector1.remove(record1);
     assert.strictEqual(1, collector1.records.length);
+  })
+
+  it('check if can afford record', function() {
+    assert.strictEqual(true, collector1.canAffordRecord(record1));
+  })
+
+  it('can buy record', function() {
+    store1.add(record1);
+    store1.add(record2);
+    collector1.buy(record1, store1);
+    assert.strictEqual(1, collector1.records.length);
+    assert.strictEqual(17.00, collector1.balance);
+    assert.strictEqual(53.00, store1.balance);
+    assert.strictEqual(1, store1.records.length);
   })
 
 
