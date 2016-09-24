@@ -8,11 +8,28 @@ var Store = function(name, city) {
 }
 
 Store.prototype = {
+  add: function(record) {
+    this.records.push(record);
+  },
+  find: function(searchedRecord) {
+    var foundRecord = _.find(this.records, function(record){
+      return record === searchedRecord;
+    });
+    if (typeof foundRecord != "undefined") {
+       return true;
+    }
+  },
+  remove: function(record) {
+    if (this.find(record) === true) {
+      var i = this.records.indexOf(record);
+      i > -1 ? this.records.splice(i,1) : [];
+    }
+  },
   canAffordRecord: function(record){
     return this.balance >= record.price ? true : false;
   },
   buy: function(record, collector){
-    if (this.canAffordRecord(record) === true) {
+    if (this.canAffordRecord(record) && collector.find(record) === true) {
       this.balance -= record.price;
       collector.balance += record.price;
       this.records.push(record);
