@@ -51,7 +51,7 @@ describe ( 'Store', function() {
     assert.strictEqual(1, store1.records.length);
     assert.strictEqual(47.00, store1.balance);
     assert.strictEqual(23.00, collector1.balance);
-    // assert.strictEqual(1, collector1.records.length);
+    assert.strictEqual(1, collector1.records.length);
   })
 
 

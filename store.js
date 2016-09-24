@@ -33,6 +33,7 @@ Store.prototype = {
       this.balance -= record.price;
       collector.balance += record.price;
       this.records.push(record);
+      collector.remove(record);
     } 
   }
 }
