@@ -8,6 +8,7 @@ var collector1 = new Collector("James");
 var record1 = new Record("Queen", "Greatest Hits", 3.00);
 var record2 = new Record("Abba", "Greatest Hits", 2.00);
 var record3 = new Record("Five", "Greatest Hits", 1.00);
+var record4 = new Record("Mogwai", "Greatest Hits", 8.00);
 
 describe ( 'Store', function() {
 
@@ -58,7 +59,7 @@ describe ( 'Store', function() {
       store1.add(record1);
       store1.add(record2);
       store1.add(record3);
-      var sorted = store1.sortByArtist()
+      var sorted = store1.sortByArtist(store1.records)
       assert.strictEqual("Abba", sorted[0].artist );
     
   })
@@ -67,8 +68,30 @@ describe ( 'Store', function() {
     store1.add(record1);
     store1.add(record2);
     store1.add(record3);
-    console.log(store1.inventory());
+    console.log(store1.inventory(store1.records));
   })
+
+  it( 'can total value of records', function() {
+    store1.add(record1);
+    store1.add(record2);
+    store1.add(record3);
+    assert.strictEqual(6, store1.stockValue())
+  })
+
+  it( 'can calculate record store value', function() {
+    store1.add(record1);
+    store1.add(record2);
+    store1.add(record3);
+    assert.strictEqual(56, store1.totalValue())
+  })
+
+  // it( 'find all records less than £5', function() {
+  //   store1.add(record1);
+  //   store1.add(record2);
+  //   store1.add(record3);
+  //   store1.add(record4);
+  //   console.log(store1.lessThanFive());
+  // })
 
 
 

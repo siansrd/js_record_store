@@ -36,15 +36,25 @@ Store.prototype = {
       collector.remove(record);
     } 
   },
-  sortByArtist: function() {
-    return _.sortBy(this.records, ['artist', 'title']);
+  sortByArtist: function(records) {
+    return _.sortBy(records, ['artist', 'title']);
   },
-  inventory: function(){
-    var sorted = this.sortByArtist();
+  inventory: function(records){
+    var sorted = this.sortByArtist(records);
     return sorted.map(function(record){
-      return record.artist.toString() + " - " + record.title.toString() + " - " + record.price.toString();
+      return ", Artist: " + record.artist.toString() + ", Title: " + record.title.toString() + ", Price: " + record.price.toString();
     });
+  },
+  stockValue: function(){
+    return _.reduce(this.records, function(acc, record) { 
+        return acc + record.price; 
+      }, 0);
+  },
+  totalValue: function() {
+    var stock = this.stockValue();
+    return stock + this.balance;
   }
+
 }
 
 module.exports = Store;
